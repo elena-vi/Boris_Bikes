@@ -1,0 +1,9 @@
+Error type : Name error : uninitialized constant docking station
+/Users/Andy/.rvm/rubies/ruby-2.3.0/bin/irb:11:in `<main>'
+from (irb):1
+
+solution create a class with a constructor method (.new)
+
+
+
+
