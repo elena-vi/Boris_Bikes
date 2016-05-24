@@ -1,0 +1,8 @@
+Objects									Messages
+
+Person
+Bike									working?
+Docking station							release_a_bike
+
+Bike <-- working? --> true/false
+Docking station <-- release_a_bike --> Bike
