@@ -13,6 +13,7 @@ class DockingStation
   end
 
   def dock_bike(bike)
+    raise "No space available" if @bike
     @bike = bike
   end
 
