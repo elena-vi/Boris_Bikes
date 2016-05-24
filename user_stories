@@ -13,6 +13,10 @@ Person
 Bike                        docked? see_docked
 Docking Station             dock_bike
 
+Objects                     Messages
 
+Person                      
+Docking station             if bikes = 0 do not release
+Bikes                       
 
 
