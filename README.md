@@ -1,3 +1,5 @@
-# Boris Bikes
+# Boris_bikes
 
-We want to build a program that will run all the Docking Stations, simulate all the Bikes, and emulate all the infrastructure (vans, repair staff, and so on) required to make the dream a reality.
+This program will simulate Santander cycle hiring scheme and run all the Docking Stations, simulate all the Bikes, and emulate all the infrastructure (vans, repair staff, and so on) required to make their dream a reality. 
+
+*The magical coalb with makers peeps*
