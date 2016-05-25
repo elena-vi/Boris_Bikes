@@ -1,27 +1,16 @@
 class Dock
 
-	attr_reader :docked_bike
+	attr_reader :bikes
 
 	def release_bike
-		# Bike.new
-		if @docked_bike.nil?
-			raise "No bikes"
-		else
-			returnBike = @docked_bike
-			@docked_bike = nil
-			return returnBike
-		end
+		@bikes.empty? ? (raise ("No bikes")) : (return @bikes.pop)
 	end
 
 	def dock_bike(bike)
-		if @docked_bike
-			raise "No space"
-		else
-			@docked_bike = bike
-		end
+		@bikes.length == 20 ?	(raise ("No space")) :	(@bikes.push(bike))
 	end
 
-	def initialize(bike)
-		@docked_bike = bike
+	def initialize
+		@bikes = Array.new
 	end
 end
