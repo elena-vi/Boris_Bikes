@@ -19,10 +19,10 @@ class Dock
 		end
 	end
 
-	def dock_bike(bike, stillWorking = true)
+	def dock_bike(curr_bike, stillWorking = true)
 		raise ("No space") if full?
-		bike.working = stillWorking
-		@bikes << bike
+		curr_bike.working = stillWorking
+		@bikes << curr_bike
 	end
 
 
