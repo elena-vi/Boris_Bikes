@@ -30,4 +30,8 @@ describe Dock do
 		expect{2.times{@dock.release_bike}}.to raise_error
 	end
 
+	it 'tries to dock another bike' do
+		expect{@dock.dock_bike(Bike.new)}.to raise_error
+	end
+
 end

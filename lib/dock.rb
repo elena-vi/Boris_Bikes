@@ -5,11 +5,19 @@ class Dock
 	def release_bike
 		# Bike.new
 		if @docked_bike.nil?
-			raise Exception.new("No bikes")
+			raise "No bikes"
 		else
 			returnBike = @docked_bike
 			@docked_bike = nil
 			return returnBike
+		end
+	end
+
+	def dock_bike(bike)
+		if @docked_bike
+			raise "No space"
+		else
+			@docked_bike = bike
 		end
 	end
 
