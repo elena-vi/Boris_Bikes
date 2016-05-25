@@ -1,6 +1,8 @@
 class Dock
 
 	attr_reader :bikes
+	attr_accessor :broken_bikes
+
 	DEFAULT_CAPACITY = 20
 
 	def initialize(capacity = DEFAULT_CAPACITY)
@@ -11,18 +13,27 @@ class Dock
 
 	def release_bike
 		raise ("No bikes") if empty?
-		if @bikes[-1].working
-			return @bikes.pop
-		else
-			@broken_bikes.push(@bikes.pop)
-			release_bike
-		end
+
+		# if @bikes[-1].working
+		# 	return @bikes.pop
+		# else
+		# 	@broken_bikes.push(@bikes.pop)
+		# 	release_bike
+		# end
+
+		return @bikes.pop
 	end
 
 	def dock_bike(curr_bike, stillWorking = true)
 		raise ("No space") if full?
-		curr_bike.working = stillWorking
-		@bikes << curr_bike
+		# curr_bike.working = stillWorking
+		# @bikes << curr_bike
+		if stillWorking
+			@bikes << curr_bike
+		else
+			curr_bike.working = stillWorking
+			@broken_bikes << curr_bike
+		end
 	end
 
 
