@@ -1,11 +1,11 @@
 require './lib/dock.rb'
 require './lib/bike.rb'
 
-
 describe Dock do
 
 	before(:each) do
 		@dock = Dock.new
+		@dock.dock_bike(Bike.new)
 	end
 
 	# it 'expects #new to have an argument' do
@@ -22,23 +22,29 @@ describe Dock do
 		expect(@dock).to respond_to(:release_bike)
 	end
 
-	it 'returns a bike and checks if it works' do
-		@dock.dock_bike(Bike.new)
+	it 'returns only working bikes' do
+		@dock.dock_bike(Bike.new, false)
 		testBike = @dock.release_bike
 		expect(testBike.class).to eq Bike
-		expect(testBike.working?).to eq true
+		expect(testBike.working).to eq true
 	end
 
-	it '#docked_bike returns instance variable @docked_bike' do
+	it 'check if docked bike is broken or not' do 
+		@dock.dock_bike(Bike.new, false)
+		expect(@dock.bikes[-1].working).to be false
+	end
+
+	it '#docked_bike returns instance variable @bikes' do
 		expect(@dock.bikes.class).to eq Array
 	end
 
 	it '#release_bike raise an error if dock is empty' do
-		expect{@dock.release_bike}.to raise_error
+		expect{2.times{@dock.release_bike}}.to raise_error
 	end
 
 	it 'tries to dock another bike' do
 		expect{(Dock::DEFAULT_CAPACITY + 1).times {@dock.dock_bike(Bike.new)}}.to raise_error
 	end
+
 
 end

@@ -5,18 +5,26 @@ class Dock
 
 	def initialize(capacity = DEFAULT_CAPACITY)
 		@bikes = Array.new
+		@broken_bikes = Array.new
 		@capacity = capacity
 	end
-	
+
 	def release_bike
 		raise ("No bikes") if empty?
-		return @bikes.pop
+		if @bikes[-1].working
+			return @bikes.pop
+		else
+			@broken_bikes.push(@bikes.pop)
+			release_bike
+		end
 	end
 
-	def dock_bike(bike)
+	def dock_bike(bike, stillWorking = true)
 		raise ("No space") if full?
-		@bikes.push(bike)
+		bike.working = stillWorking
+		@bikes << bike
 	end
+
 
 	private
 
