@@ -12,6 +12,12 @@ describe Dock do
 	# 	expect{Dock.new(Bike.new)}.to_not raise_error
 	# end
 
+	it 'checks that user can set capacity' do
+		dock2 = Dock.new(30)
+		30.times {dock2.dock_bike(Bike.new)}
+		expect(dock2.bikes.length).to eq 30
+	end
+
 	it 'respond to release_bike' do
 		expect(@dock).to respond_to(:release_bike)
 	end
@@ -28,11 +34,11 @@ describe Dock do
 	end
 
 	it '#release_bike raise an error if dock is empty' do
-		expect{2.times{@dock.release_bike}}.to raise_error
+		expect{@dock.release_bike}.to raise_error
 	end
 
 	it 'tries to dock another bike' do
-		expect{21.times {@dock.dock_bike(Bike.new)}}.to raise_error
+		expect{(Dock::DEFAULT_CAPACITY + 1).times {@dock.dock_bike(Bike.new)}}.to raise_error
 	end
 
 end

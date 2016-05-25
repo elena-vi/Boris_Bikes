@@ -1,7 +1,13 @@
 class Dock
 
 	attr_reader :bikes
+	DEFAULT_CAPACITY = 20
 
+	def initialize(capacity = DEFAULT_CAPACITY)
+		@bikes = Array.new
+		@capacity = capacity
+	end
+	
 	def release_bike
 		raise ("No bikes") if empty?
 		return @bikes.pop
@@ -12,13 +18,10 @@ class Dock
 		@bikes.push(bike)
 	end
 
-	def initialize
-		@bikes = Array.new
-	end
-	
 	private
+
 	def full?
-		@bikes.length == 20
+		@bikes.length == @capacity
 	end
 
 	def empty?
