@@ -6,20 +6,27 @@ class DockingStation
 
   def initialize(init_spaces = 20)
     @no_of_spaces = init_spaces
-  	@bike_spaces = Array.new
-  end 
+    @bike_spaces = Array.new
+  end
 
   def release_bike
-    raise "No bikes available" if @bike_spaces.empty?
+    raise "No bikes available" if empty?
     @bike_spaces.pop
-  end 
+  end
 
   def dock(bike)
-  	if @bike_spaces.length >= @no_of_spaces
-  		raise "Docking station is full"
-  	else
-  		@bike_spaces << bike
-  	end
+    raise "Docking station is full" if full?
+    @bike_spaces << bike
+  end
+
+  private
+
+  def full?
+    @bike_spaces.length >= @no_of_spaces # Comparing two numbers already retruns true/fase by ruby magijs, no need for returns  
+  end
+
+  def empty?
+    @bike_spaces.empty?
   end
 
 end
