@@ -14,13 +14,13 @@ describe DockingStation do
 
 
 	it 'responds to bike method' do
-		expect(subject).to respond_to(:bike_spaces)
+		expect(subject).to respond_to(:working_bikes)
 	end
 
 	it 'checks if a bike is docked' do
 		bike = Bike.new
 		subject.dock(bike)
-		expect(subject.bike_spaces[-1]).to eq bike
+		expect(subject.working_bikes[-1]).to eq bike
 	end
 
 	describe "#release_bike releases a bike" do
@@ -32,6 +32,14 @@ describe DockingStation do
 		it 'raises an error message if there are no bikes available' do
 			expect{subject.release_bike}.to raise_error('No bikes available')
 		end
+
+		it 'does not releases when bike is broken' do
+			b_bike = Bike.new.broken
+			subject.dock(b_bike)
+			expect{subject.release_bike}.to raise_error('No workings bikes available')
+		end
+
+
 	end
 
 	describe '#dock(bike) docks a bike' do
@@ -44,6 +52,7 @@ describe DockingStation do
 			default_size_of_dock.times {subject.dock(Bike.new)} # First add 20 bikes, then add another and watch the world burn
 			expect{subject.dock(Bike.new)}.to raise_error('Docking station is full')
 		end
+
 	end
 
 end

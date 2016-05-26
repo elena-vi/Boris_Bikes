@@ -10,6 +10,10 @@ class Bike
 		@working ? true : false
 	end
 
+	def broken
+		@working = false
+		return self
+	end
 
 end
 

@@ -2,31 +2,39 @@ require_relative 'bike'
 
 class DockingStation
   DEFAULT_CAPACITY = 20
-  attr_reader :bike_spaces
+  attr_reader :working_bikes
 
   def initialize(init_spaces = DEFAULT_CAPACITY)
     @no_of_spaces = init_spaces
-    @bike_spaces = Array.new
+    @working_bikes = Array.new
+    @broken_bikes = Array.new
   end
 
   def release_bike
+    raise 'No workings bikes available' if empty? && !@broken_bikes.empty?
     raise "No bikes available" if empty?
-    @bike_spaces.pop
+    @working_bikes.pop
   end
 
   def dock(bike)
     raise "Docking station is full" if full?
-    @bike_spaces << bike
+
+    if bike.working?
+      @working_bikes << bike
+    else
+      @broken_bikes << bike
+    end
+
   end
 
   private
 
   def full?
-    @bike_spaces.length >= @no_of_spaces # Comparing two numbers already retruns true/fase by ruby magijs, no need for returns  
+    @working_bikes.length + @broken_bikes.length >= @no_of_spaces # Comparing two numbers already retruns true/fase by ruby magijs, no need for returns
   end
 
   def empty?
-    @bike_spaces.empty?
+    @working_bikes.empty?
   end
 
 end
