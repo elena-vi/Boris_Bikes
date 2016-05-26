@@ -7,4 +7,9 @@ describe Bike do
 	it 'is working' do
 		expect(subject).to be_working
 	end
+	it 'breaks' do
+		testyBike = subject
+		testyBike.working = false
+		expect(testyBike.working?).to eq false
+	end
 end
