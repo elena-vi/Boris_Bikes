@@ -40,7 +40,8 @@ describe DockingStation do
 			expect(subject.dock(bike)).to eq [bike]
 		end
 		it 'raises an error message if we add a bike to a full docking station (20 bikes capacity)' do
-			DockingStation::DEFAULT_CAPACITY.times {subject.dock(Bike.new)} # First add 20 bikes, then add another and watch the world burn
+			default_size_of_dock = DockingStation::DEFAULT_CAPACITY # In order to retrieve a constant from a class you must ask the class, like this Class::CONSTANT (not an instance of the class, that's why simply doing "subject.DEFAULT_CAPACITY" or "subject::DEFAULT_CAPACITY" did not work)
+			default_size_of_dock.times {subject.dock(Bike.new)} # First add 20 bikes, then add another and watch the world burn
 			expect{subject.dock(Bike.new)}.to raise_error('Docking station is full')
 		end
 	end
