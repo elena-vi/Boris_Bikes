@@ -2,22 +2,23 @@ require_relative 'bike'
 
 class DockingStation
 
-  attr_reader :bike
-  def initialize ( bikes = 20 )
-  	@bikes = bikes
+  attr_reader :bike_spaces
+
+  def initialize(init_spaces = 20)
+    @no_of_spaces = init_spaces
+  	@bike_spaces = Array.new
   end 
 
-
   def release_bike
-    raise "No bikes available" unless @bike
-    @bike
+    raise "No bikes available" if @bike_spaces.empty?
+    @bike_spaces.pop
   end 
 
   def dock(bike)
-  	if @bikes >= 20
+  	if @bike_spaces.length >= @no_of_spaces
   		raise "Docking station is full"
   	else
-  		@bikes = bike
+  		@bike_spaces << bike
   	end
   end
 
@@ -27,13 +28,13 @@ end
 
 
 # [1] pry(main)> require './lib/docking_station'
-# => true
+# => true magicss!!!
 # [2] pry(main)> docking_station = DockingStation.new
 # => #<DockingStation:0x007fa433224c58>
 # [3] pry(main)> bike = Bike.new
 # => #<Bike:0x007fa433165268>
 # [4] pry(main)> docking_station.dock(bike)
-# => RuntimeError: Docking station full
+# => RuntimeError: Docking station full magicss!!!
 # [5] pry(main)> 21.times {docking_station.release_bike}
 # RuntimeError: No bikes available
-# from /Users/abdullamahmood/Projects/boris-bikes/lib/docking_station.rb:8:in `release_bike'
+# from /Users/abdullamahmood/Projects/boris-bikes/lib/docking_station.rb:8:in `release_bike' magicss!!!
